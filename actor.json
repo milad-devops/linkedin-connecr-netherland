@@ -1,40 +1,17 @@
 {
   "name": "linkedin-auto-connect",
-  "version": "1.0.0",
-  "buildTag": "latest",
-  "environmentVariables": {},
-  "input": {
-    "title": "LinkedIn Auto Connect",
+  "version": "0.0.1",
+  "description": "Auto-connect to Dutch recruiters on LinkedIn using official scraper + Playwright",
+  "main": "main.js",
+  "inputs": {
     "type": "object",
-    "schema": {
-      "type": "object",
-      "properties": {
-        "LINKEDIN_EMAIL": {
-          "type": "string",
-          "title": "LinkedIn Email"
-        },
-        "LINKEDIN_PASSWORD": {
-          "type": "string",
-          "title": "LinkedIn Password"
-        },
-        "SEARCH_KEYWORD": {
-          "type": "string",
-          "title": "Search Keyword"
-        },
-        "CONNECT_MESSAGE": {
-          "type": "string",
-          "title": "Connect Message"
-        },
-        "dailyLimit": {
-          "type": "number",
-          "title": "Daily Limit"
-        }
-      },
-      "required": [
-        "LINKEDIN_EMAIL",
-        "LINKEDIN_PASSWORD",
-        "SEARCH_KEYWORD"
-      ]
-    }
+    "properties": {
+      "LINKEDIN_EMAIL": { "type": "string", "title": "LinkedIn Email" },
+      "LINKEDIN_PASSWORD": { "type": "string", "title": "LinkedIn Password" },
+      "SEARCH_KEYWORD": { "type": "string", "title": "Search Keyword", "default": "recruiter netherlands" },
+      "CONNECT_MESSAGE": { "type": "string", "title": "Connect Message", "default": "Hi! I would be happy to connect with you." },
+      "dailyLimit": { "type": "integer", "title": "Daily Connect Limit", "default": 10 }
+    },
+    "required": ["LINKEDIN_EMAIL", "LINKEDIN_PASSWORD"]
   }
 }
