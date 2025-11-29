@@ -1,6 +1,6 @@
 FROM node:22-bullseye
 
-# نصب کتابخانه‌های مورد نیاز برای Playwright
+# نصب کتابخانه‌های مورد نیاز Playwright
 RUN apt-get update && apt-get install -y \
     xvfb wget libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 \
     libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 \
