@@ -2,8 +2,6 @@ import { Actor, log, Dataset } from 'apify';
 import playwright from 'playwright';
 import { ApifyClient } from 'apify';
 
-const client = new ApifyClient({ token: process.env.APIFY_TOKEN });
-
 await Actor.init();
 
 const input = await Actor.getInput();
@@ -11,24 +9,23 @@ const { LINKEDIN_EMAIL, LINKEDIN_PASSWORD, SEARCH_KEYWORD, CONNECT_MESSAGE, dail
 
 if (!LINKEDIN_EMAIL || !LINKEDIN_PASSWORD) throw new Error('Email or password missing!');
 
-// --- 1️⃣ Run official LinkedIn Profile Scraper ---
 log.info('Running official LinkedIn Profile Scraper...');
-const run = await client.acts.startActorRun('apify/linkedin-profile-scraper', {
-    body: {
-        searchStrings: [SEARCH_KEYWORD],
-        maxProfiles: 50,
-        resultsType: 'RECENT',
-        useChrome: true
-    }
+
+const client = new ApifyClient({ token: process.env.APIFY_TOKEN });
+
+// روش صحیح: call() به جای startActorRun()
+const run = await client.actor('apify/linkedin-profile-scraper').call({
+    searchStrings: [SEARCH_KEYWORD],
+    maxProfiles: 50,
+    resultsType: 'RECENT',
+    useChrome: true,
 });
 
-// --- Wait for the scraper to finish ---
-const { defaultDatasetId } = await client.acts.getRun(run.id);
-const { items: profiles } = await client.datasets.getItems(defaultDatasetId, { clean: true });
-
+// پروفایل‌ها از run.output.items می‌آیند
+const profiles = run.output?.items || [];
 log.info(`Scraper collected ${profiles.length} profiles.`);
 
-// --- 2️⃣ Launch Playwright to send Connect Request ---
+// --- Launch Playwright to send Connect Request ---
 const browser = await playwright.chromium.launch({ headless: false, slowMo: 1000 });
 const context = await browser.newContext();
 const page = await context.newPage();
