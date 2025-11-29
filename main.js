@@ -10,6 +10,13 @@ const {
     CONNECT_MESSAGE = "Hi! I'd be happy to connect with you!",
 } = Actor.getInput();
 
+log.info("DEBUG INPUT:", {
+    LINKEDIN_EMAIL,
+    LINKEDIN_PASSWORD,
+    SEARCH_KEYWORD,
+    CONNECT_MESSAGE
+});
+
 log.info("Launching browser...");
 
 const browser = await playwright.chromium.launch({
