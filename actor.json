@@ -1,0 +1,10 @@
+{
+    "name": "linkedin-auto-connect",
+    "title": "LinkedIn Auto Connect",
+    "description": "Automatically connects to LinkedIn users based on a search keyword.",
+    "version": "1.0.0",
+    "buildTag": "latest",
+    "meta": {
+        "supportedActorVersions": ["3.0.0"]
+    }
+}
