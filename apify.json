@@ -1,0 +1,22 @@
+{
+  "name": "linkedin-auto-connect",
+  "version": "1.0.0",
+  "env": {
+    "title": "LinkedIn Auto Connect",
+    "description": "Automatically searches recruiters in Netherlands and sends connection requests."
+  },
+  "input": {
+    "schemaVersion": 1,
+    "type": "object",
+    "properties": {
+      "email": { "type": "string" },
+      "password": { "type": "string" },
+      "connectMessage": { "type": "string" },
+      "dailyLimit": {
+        "type": "integer",
+        "default": 20
+      }
+    },
+    "required": ["email", "password"]
+  }
+}
